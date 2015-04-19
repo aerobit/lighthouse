@@ -1,4 +1,4 @@
-from multiprocessing import Lock
+from multiprocessing import Manager
 import sys
 
 MAX_OUTPUT = 100 * 1024
@@ -14,19 +14,17 @@ def escape(string):
 
 class Lighthouse(object):
     def __init__(self):
-        self._items = []
-        self._items_lock = Lock()
+        self._man = Manager()
+        self._items = self._man.list()
 
     def add_item(self, name, command):
-        with self._items_lock:
-            item = "{%s|%s}" % (escape(name), escape(command))
-            self._items.append(item)
-            self.flush()
+        item = "{%s|%s}" % (escape(name), escape(command))
+        self._items.insert(0, item)
+        self.flush()
 
     def flush(self):
         print "".join([item for item in self._items])
         sys.stdout.flush()
 
     def clear(self):
-        with self._items_lock:
-            self._items = []
+        self._items = self._man.list()
