@@ -11,7 +11,7 @@ def get(lighthouse, query):
 
     menu_entry = "%%I%s%%%s" % (icon, name) if icon else name
 
-    lighthouse.add_item(menu_entry, exec_path)
+    lighthouse.add_item(menu_entry, exec_path, 1)
 
 
 def find_desktop_entry(cmd):

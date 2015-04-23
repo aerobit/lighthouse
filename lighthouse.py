@@ -17,13 +17,13 @@ class Lighthouse(object):
         self._man = Manager()
         self._items = self._man.list()
 
-    def add_item(self, name, command, usefulness=0):
-        item = "{%s|%s}" % (escape(name), escape(command))
-        self._items.insert(0, item)
+    def add_item(self, name, command, priority=10):  # 0 is highest
+        item = (priority, escape(name), escape(command))
+        self._items.append(item)
         self.flush()
 
     def flush(self):
-        print "".join([item for item in self._items])
+        print "".join(["{{{1}|{2}}}".format(*item) for item in sorted(self._items)])
         sys.stdout.flush()
 
     def clear(self):
