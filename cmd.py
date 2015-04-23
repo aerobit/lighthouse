@@ -38,7 +38,7 @@ while True:
 
     lh.add_item("execute %s" % user_input, user_input)
 
-    lh.add_item("run '%s' in a shell" % user_input, "urxvt -e %s" % user_input)
+    lh.add_item("run '%s' in a shell" % user_input, "urxvt -e %s;zsh" % user_input)
 
     # Is this python?
     try:

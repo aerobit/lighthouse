@@ -17,7 +17,7 @@ class Lighthouse(object):
         self._man = Manager()
         self._items = self._man.list()
 
-    def add_item(self, name, command):
+    def add_item(self, name, command, usefulness=0):
         item = "{%s|%s}" % (escape(name), escape(command))
         self._items.insert(0, item)
         self.flush()

@@ -7,8 +7,9 @@ def get(lighthouse, query):
     desktop_entry = find_desktop_entry(query)
     exec_path = get_xdg_exec(desktop_entry)
     icon = get_icon(desktop_entry)
+    name = desktop_entry.getName()
 
-    menu_entry = "%%I%s%%%s" % (icon, query) if icon else query
+    menu_entry = "%%I%s%%%s" % (icon, name) if icon else name
 
     lighthouse.add_item(menu_entry, exec_path)
 
