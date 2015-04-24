@@ -1,1 +1,1 @@
-__all__ = ["desktop", "find", "google"]
+__all__ = ["desktop", "find"]

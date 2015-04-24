@@ -18,16 +18,11 @@ def find_desktop_entry(cmd):
     desktop_files = []
     desktop_dirs = list(BaseDirectory.load_data_paths('applications'))
     for d in desktop_dirs:
-        desktop_files += [os.path.join(d, name) for name in os.listdir(d)]
+        desktop_files += [DesktopEntry.DesktopEntry(os.path.join(d, name)) for name in os.listdir(d) if name.endswith(".desktop")]
 
-    matches = []
-    for file_ in desktop_files:
-        if cmd in file_:
-            matches.append(file_)
+    matches = [entry for entry in desktop_files if cmd.lower() in entry.getName().lower()]
 
-    desktop_file = matches[0]
-    desktop_entry = DesktopEntry.DesktopEntry(desktop_file)
-    return desktop_entry
+    return matches[0]
 
 
 def get_icon(desktop_entry):

@@ -91,7 +91,7 @@ class Google(object):
             q = urllib.urlencode(args)
             search_results = urllib.urlopen(URL + q)
             data = json.loads(search_results.read())
-            if not 'responseStatus' in data:
+            if 'responseStatus' not in data:
                 self.logger.error('response does not have a responseStatus key')
                 continue
             if data.get('responseStatus') != 200:
