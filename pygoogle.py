@@ -1,3 +1,5 @@
+# Written by Kiran Bandla, slightly modified to work with the updated Google API.
+
 import json
 
 import sys
